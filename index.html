@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			Fashion Store
+		</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				background: #f5f1e9;
+				color: #302820;
+				font-family: 'Manrope', sans-serif;
+			}
+
+			h1, h2, h3, h4, .serif {
+				font-family: 'Cormorant Garamond', serif;
+			}
+
+			.hero-title {
+				animation: revealUp 1s ease both;
+			}
+
+			.hero-image {
+				animation: revealImage 1.2s ease .15s both;
+			}
+
+			.hero-image img,
+			.product-image img,
+			.collection-image img {
+				transition: transform .8s cubic-bezier(.2,.7,.2,1);
+			}
+
+			.hero-image:hover img,
+			.product-card:hover .product-image img,
+			.collection-card:hover .collection-image img {
+				transform: scale(1.07);
+			}
+
+			.shop-button {
+				transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
+			}
+
+			.shop-button:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 12px 25px rgba(48, 40, 32, .18);
+			}
+
+			.product-card {
+				transition: transform .4s ease, box-shadow .4s ease;
+			}
+
+			.product-card:hover {
+				transform: translateY(-8px);
+				box-shadow: 0 18px 35px rgba(48, 40, 32, .12);
+			}
+
+			.nav-item {
+				position: relative;
+			}
+
+			.nav-item::after {
+				content: "";
+				position: absolute;
+				left: 0;
+				bottom: -7px;
+				width: 0;
+				height: 1px;
+				background: #a65d3e;
+				transition: width .3s ease;
+			}
+
+			.nav-item:hover::after {
+				width: 100%;
+			}
+
+			.collection-card {
+				transition: transform .45s ease;
+			}
+
+			.collection-card:hover {
+				transform: translateY(-7px);
+			}
+
+			.floating-label {
+				animation: floatLabel 4s ease-in-out infinite;
+			}
+
+			.round-detail {
+				animation: rotateDetail 18s linear infinite;
+			}
+
+			.editorial-text {
+				transition: color .3s ease, transform .3s ease;
+			}
+
+			.editorial-text:hover {
+				color: #a65d3e;
+				transform: translateX(8px);
+			}
+
+			@keyframes revealUp {
+				from {
+					opacity: 0;
+					transform: translateY(45px);
+				}
+
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes revealImage {
+				from {
+					opacity: 0;
+					transform: translateX(35px);
+				}
+
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+
+			@keyframes floatLabel {
+				0%, 100% {
+					transform: translateY(0);
+				}
+
+				50% {
+					transform: translateY(-12px);
+				}
+			}
+
+			@keyframes rotateDetail {
+				to {
+					transform: rotate(360deg);
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				*,
+				*::before,
+				*::after {
+					animation-duration: .01ms !important;
+					animation-iteration-count: 1 !important;
+					scroll-behavior: auto !important;
+					transition-duration: .01ms !important;
+				}
+			}
+		</style>
+	</head>
+
+<body>
+
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="bg-[#302820] text-[#f5f1e9] text-center py-3 px-4 text-[10px] sm:text-xs tracking-[2px] uppercase">
+        Complimentary shipping on orders above ₹4,999
+    </div>
+
+
+    <!-- NAVBAR -->
+    <header class="px-6 lg:px-16 py-6 bg-[#f5f1e9]">
+
+        <nav class="max-w-7xl mx-auto flex items-center justify-between">
+
+            <a href="#" class="serif text-3xl sm:text-4xl font-bold tracking-wide">
+                ATELIERÉ<span class="text-[#a65d3e]">®</span>
+            </a>
+
+            <div class="hidden lg:flex items-center gap-9 text-xs font-bold uppercase tracking-[1.5px] text-[#766b5f]">
+                <a href="#new" class="nav-item">New Arrivals</a>
+                <a href="#collections" class="nav-item">Collections</a>
+                <a href="#story" class="nav-item">Our Story</a>
+                <a href="#journal" class="nav-item">Journal</a>
+            </div>
+
+            <div class="flex items-center gap-5 text-xs font-bold uppercase tracking-wider">
+                <a href="#new" class="hidden sm:block hover:text-[#a65d3e] transition">Shop</a>
+                <a href="#contact" class="shop-button bg-[#302820] text-white px-6 py-3 rounded-full">
+                    Get in Touch
+                </a>
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+        <section class="px-6 lg:px-16 pt-10 pb-24">
+
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-[.9fr_1.1fr] gap-12 items-center">
+
+                <div class="hero-title">
+
+                    <p class="text-[#a65d3e] text-xs font-bold uppercase tracking-[4px] mb-8">
+                        The Art of Dressing / 2026
+                    </p>
+
+                    <h1 class="serif text-7xl sm:text-8xl lg:text-[112px] leading-[.83] tracking-[-3px]">
+                        Wear
+                        <span class="block italic text-[#a65d3e]">your</span>
+                        story.
+                    </h1>
+
+                    <p class="text-[#817568] text-sm sm:text-base leading-8 max-w-md mt-9">
+                        Thoughtfully designed pieces for those who
+                        believe personal style is an expression of
+                        individuality, confidence and quiet elegance.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mt-10">
+
+                        <a href="#new"
+                            class="shop-button bg-[#a65d3e] text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider">
+                            Discover the Edit
+                        </a>
+
+                        <a href="#collections"
+                            class="shop-button border border-[#c8bfb0] px-8 py-4 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-[#302820] hover:text-white">
+                            Explore Collections
+                        </a>
+
+                    </div>
+
+                    <div class="mt-16 flex items-center gap-5">
+
+                        <div class="flex -space-x-3">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                                alt="Fashion customer" class="w-10 h-10 rounded-full object-cover border-2 border-[#f5f1e9]">
+
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80"
+                                alt="Fashion customer" class="w-10 h-10 rounded-full object-cover border-2 border-[#f5f1e9]">
+
+                            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=100&q=80"
+                                alt="Fashion customer" class="w-10 h-10 rounded-full object-cover border-2 border-[#f5f1e9]">
+                        </div>
+
+                        <div>
+                            <p class="text-xs font-bold">Made for individuality</p>
+                            <p class="text-[10px] text-[#918477] mt-1">Considered design. Lasting style.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-image relative">
+
+                    <div class="absolute -top-5 -right-4 w-24 h-24 border border-[#a65d3e] rounded-full round-detail z-10"></div>
+
+                    <div class="relative overflow-hidden rounded-t-[180px] rounded-b-[24px] bg-[#d8cabe]">
+                        <img
+                            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=90"
+                            alt="Contemporary fashion editorial campaign"
+                            class="w-full h-[540px] sm:h-[650px] object-cover">
+                    </div>
+
+                    <div class="floating-label absolute -bottom-7 -left-5 sm:-left-9 bg-[#d7d1b9] p-6 sm:p-8 rounded-2xl shadow-xl">
+                        <p class="text-[10px] uppercase tracking-[3px] text-[#766b5f]">The new season</p>
+                        <h3 class="serif text-3xl font-semibold mt-2">Form & Feeling</h3>
+                    </div>
+
+                    <div class="absolute top-1/2 -right-5 hidden sm:block bg-[#a65d3e] text-white px-5 py-4 rounded-full rotate-90 text-[10px] tracking-[3px] uppercase">
+                        New Collection
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BRAND STATEMENT -->
+        <section class="bg-[#302820] text-[#f5f1e9] px-6 lg:px-16 py-20">
+
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-[.55fr_1.45fr] gap-10 items-start">
+
+                <p class="text-[#c2a58d] text-xs uppercase tracking-[4px] font-bold pt-3">
+                    Beyond Trends
+                </p>
+
+                <div>
+                    <h2 class="serif text-4xl sm:text-5xl lg:text-7xl leading-[1.08]">
+                        Style is not about being seen.
+                        It's about being <span class="italic text-[#d5a17e]">remembered.</span>
+                    </h2>
+
+                    <p class="text-[#b8a99a] text-sm leading-8 max-w-xl mt-8">
+                        We create clothing that feels personal,
+                        considered and effortlessly expressive.
+                        Every detail has a purpose, every silhouette
+                        tells a story.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NEW ARRIVALS -->
+        <section id="new" class="px-6 lg:px-16 py-28">
+
+            <div class="max-w-7xl mx-auto">
+
+                <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-14">
+
+                    <div>
+                        <p class="text-[#a65d3e] text-xs uppercase tracking-[4px] font-bold mb-5">
+                            Just Landed / 01
+                        </p>
+
+                        <h2 class="serif text-6xl sm:text-7xl">
+                            The latest <span class="italic">edit.</span>
+                        </h2>
+                    </div>
+
+                    <a href="#collections" class="text-xs font-bold uppercase tracking-widest border-b border-[#a65d3e] pb-2 hover:text-[#a65d3e] transition">
+                        View all pieces
+                    </a>
+
+                </div>
+
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+
+                    <!-- PRODUCT 1 -->
+                    <article class="product-card">
+
+                        <div class="product-image relative overflow-hidden rounded-2xl bg-[#e7ded2]">
+                            <span class="absolute top-4 left-4 z-10 bg-[#f5f1e9] px-3 py-2 rounded-full text-[9px] font-bold uppercase tracking-widest">
+                                New
+                            </span>
+
+                            <img
+                                src="https://images.unsplash.com/photo-1539533018447-63fcce2678e3?auto=format&fit=crop&w=700&q=85"
+                                alt="Women's tailored fashion coat"
+                                class="w-full h-[350px] object-cover">
+                        </div>
+
+                        <div class="flex justify-between gap-3 mt-5">
+                            <div>
+                                <h3 class="font-bold text-sm">The Sculpted Coat</h3>
+                                <p class="text-xs text-[#928578] mt-2">Structured Outerwear</p>
+                            </div>
+                            <p class="text-sm font-bold">₹8,490</p>
+                        </div>
+
+                        <a href="#contact" class="inline-block text-[10px] uppercase tracking-widest font-bold mt-5 border-b border-[#a65d3e] pb-1">
+                            Discover piece
+                        </a>
+
+                    </article>
+
+
+                    <!-- PRODUCT 2 -->
+                    <article class="product-card">
+
+                        <div class="product-image relative overflow-hidden rounded-2xl bg-[#ddd5ca]">
+                            <span class="absolute top-4 left-4 z-10 bg-[#a65d3e] text-white px-3 py-2 rounded-full text-[9px] font-bold uppercase tracking-widest">
+                                Bestseller
+                            </span>
+
+                            <img
+                                src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=85"
+                                alt="Contemporary women's fashion outfit"
+                                class="w-full h-[350px] object-cover">
+                        </div>
+
+                        <div class="flex justify-between gap-3 mt-5">
+                            <div>
+                                <h3 class="font-bold text-sm">Everyday Muse</h3>
+                                <p class="text-xs text-[#928578] mt-2">Modern Essentials</p>
+                            </div>
+                            <p class="text-sm font-bold">₹4,250</p>
+                        </div>
+
+                        <a href="#contact" class="inline-block text-[10px] uppercase tracking-widest font-bold mt-5 border-b border-[#a65d3e] pb-1">
+                            Discover piece
+                        </a>
+
+                    </article>
+
+
+                    <!-- PRODUCT 3 -->
+                    <article class="product-card">
+
+                        <div class="product-image relative overflow-hidden rounded-2xl bg-[#d5d1c6]">
+                            <img
+                                src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=700&q=85"
+                                alt="Minimal tailored jacket"
+                                class="w-full h-[350px] object-cover">
+                        </div>
+
+                        <div class="flex justify-between gap-3 mt-5">
+                            <div>
+                                <h3 class="font-bold text-sm">The Modern Layer</h3>
+                                <p class="text-xs text-[#928578] mt-2">Relaxed Tailoring</p>
+                            </div>
+                            <p class="text-sm font-bold">₹6,790</p>
+                        </div>
+
+                        <a href="#contact" class="inline-block text-[10px] uppercase tracking-widest font-bold mt-5 border-b border-[#a65d3e] pb-1">
+                            Discover piece
+                        </a>
+
+                    </article>
+
+
+                    <!-- PRODUCT 4 -->
+                    <article class="product-card">
+
+                        <div class="product-image relative overflow-hidden rounded-2xl bg-[#e2d8cb]">
+                            <span class="absolute top-4 left-4 z-10 bg-[#f5f1e9] px-3 py-2 rounded-full text-[9px] font-bold uppercase tracking-widest">
+                                Limited
+                            </span>
+
+                            <img
+                                src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=700&q=85"
+                                alt="Elegant seasonal fashion styling"
+                                class="w-full h-[350px] object-cover">
+                        </div>
+
+                        <div class="flex justify-between gap-3 mt-5">
+                            <div>
+                                <h3 class="font-bold text-sm">Soft Structure</h3>
+                                <p class="text-xs text-[#928578] mt-2">Seasonal Collection</p>
+                            </div>
+                            <p class="text-sm font-bold">₹5,590</p>
+                        </div>
+
+                        <a href="#contact" class="inline-block text-[10px] uppercase tracking-widest font-bold mt-5 border-b border-[#a65d3e] pb-1">
+                            Discover piece
+                        </a>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- COLLECTIONS -->
+        <section id="collections" class="bg-[#e9e3d9] px-6 lg:px-16 py-28">
+
+            <div class="max-w-7xl mx-auto">
+
+                <div class="text-center max-w-2xl mx-auto mb-16">
+
+                    <p class="text-[#a65d3e] text-xs uppercase tracking-[4px] font-bold mb-5">
+                        Find Your Expression
+                    </p>
+
+                    <h2 class="serif text-6xl sm:text-7xl">
+                        Curated <span class="italic">collections.</span>
+                    </h2>
+
+                    <p class="text-[#817568] text-sm leading-7 mt-6">
+                        Explore considered pieces designed to move
+                        with you through every moment and mood.
+                    </p>
+
+                </div>
+
+
+                <div class="grid md:grid-cols-3 gap-7">
+
+                    <a href="#new" class="collection-card group">
+                        <div class="collection-image overflow-hidden rounded-t-[140px] rounded-b-2xl bg-[#d5c7b7]">
+                            <img
+                                src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=900&q=85"
+                                alt="Elegant women's clothing collection"
+                                class="w-full h-[430px] object-cover">
+                        </div>
+
+                        <div class="flex justify-between items-center mt-6">
+                            <div>
+                                <h3 class="serif text-3xl font-semibold">The Essentials</h3>
+                                <p class="text-xs text-[#8b7d70] mt-2">Everyday, elevated.</p>
+                            </div>
+                            <span class="w-11 h-11 rounded-full border border-[#b7aa9a] flex items-center justify-center group-hover:bg-[#302820] group-hover:text-white transition">↗</span>
+                        </div>
+                    </a>
+
+
+                    <a href="#new" class="collection-card group md:mt-16">
+                        <div class="collection-image overflow-hidden rounded-2xl bg-[#d5c7b7]">
+                            <img
+                                src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=85"
+                                alt="Contemporary fashion collection editorial"
+                                class="w-full h-[430px] object-cover">
+                        </div>
+
+                        <div class="flex justify-between items-center mt-6">
+                            <div>
+                                <h3 class="serif text-3xl font-semibold">The Statement</h3>
+                                <p class="text-xs text-[#8b7d70] mt-2">Made to be noticed.</p>
+                            </div>
+                            <span class="w-11 h-11 rounded-full border border-[#b7aa9a] flex items-center justify-center group-hover:bg-[#302820] group-hover:text-white transition">↗</span>
+                        </div>
+                    </a>
+
+
+                    <a href="#new" class="collection-card group">
+                        <div class="collection-image overflow-hidden rounded-t-[140px] rounded-b-2xl bg-[#d5c7b7]">
+                            <img
+                                src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=85"
+                                alt="Modern streetwear fashion collection"
+                                class="w-full h-[430px] object-cover">
+                        </div>
+
+                        <div class="flex justify-between items-center mt-6">
+                            <div>
+                                <h3 class="serif text-3xl font-semibold">The Individual</h3>
+                                <p class="text-xs text-[#8b7d70] mt-2">Your style, your rules.</p>
+                            </div>
+                            <span class="w-11 h-11 rounded-full border border-[#b7aa9a] flex items-center justify-center group-hover:bg-[#302820] group-hover:text-white transition">↗</span>
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EDITORIAL CAMPAIGN -->
+        <section class="px-6 lg:px-16 py-28">
+
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_.9fr] gap-12 items-center">
+
+                <div class="relative">
+
+                    <div class="overflow-hidden rounded-[24px]">
+                        <img
+                            src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1200&q=90"
+                            alt="Fashion editorial campaign"
+                            class="w-full h-[570px] object-cover hover:scale-105 transition duration-700">
+                    </div>
+
+                    <div class="floating-label absolute -bottom-6 -right-4 sm:-right-8 bg-[#d5d0bb] rounded-2xl px-7 py-6 shadow-lg">
+                        <p class="text-[10px] uppercase tracking-[3px] text-[#766b5f]">Editorial no. 04</p>
+                        <p class="serif text-3xl font-semibold mt-2">A quieter kind of luxury.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="lg:pl-10 pt-6">
+
+                    <p class="text-[#a65d3e] text-xs font-bold uppercase tracking-[4px] mb-7">
+                        The Atelier Journal
+                    </p>
+
+                    <h2 class="serif text-6xl sm:text-7xl leading-[.95]">
+                        Less noise.
+                        <span class="block italic text-[#a65d3e]">More meaning.</span>
+                    </h2>
+
+                    <p class="text-[#817568] text-sm leading-8 mt-8">
+                        Fashion moves quickly. We believe great style
+                        takes a different approach. It comes from
+                        choosing carefully, wearing confidently and
+                        finding beauty in the details.
+                    </p>
+
+                    <p class="text-[#817568] text-sm leading-8 mt-5">
+                        Our collections are shaped by thoughtful
+                        silhouettes, tactile materials and a love
+                        for pieces that feel just as relevant tomorrow.
+                    </p>
+
+                    <a href="#story"
+                        class="shop-button inline-flex bg-[#302820] text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest mt-9">
+                        Read Our Philosophy
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BRAND STORY -->
+        <section id="story" class="bg-[#d7d1b9] px-6 lg:px-16 py-28">
+
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+
+                <div>
+
+                    <p class="text-[#a65d3e] text-xs font-bold uppercase tracking-[4px] mb-6">
+                        The Atelier Philosophy
+                    </p>
+
+                    <h2 class="serif text-6xl sm:text-7xl leading-[.95]">
+                        Designed with
+                        <span class="italic">intention.</span>
+                    </h2>
+
+                    <p class="text-[#71695c] text-sm leading-8 mt-8">
+                        ATELIERÉ began with a simple idea:
+                        clothing should feel as individual as the
+                        person wearing it. Our approach brings
+                        together considered design, modern forms
+                        and an appreciation for timeless details.
+                    </p>
+
+                    <p class="text-[#71695c] text-sm leading-8 mt-5">
+                        We value quality over quantity, character
+                        over convention and personal expression
+                        over passing trends.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-8 mt-12 pt-8 border-t border-[#bcb49c]">
+
+                        <div>
+                            <h3 class="serif text-4xl font-semibold">Thoughtful</h3>
+                            <p class="text-xs text-[#817568] mt-2">Design approach</p>
+                        </div>
+
+                        <div>
+                            <h3 class="serif text-4xl font-semibold">Distinctive</h3>
+                            <p class="text-xs text-[#817568] mt-2">Personal expression</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="relative">
+
+                    <div class="absolute -top-7 -right-6 w-28 h-28 border border-[#a65d3e] rounded-full round-detail"></div>
+
+                    <div class="overflow-hidden rounded-[24px]">
+                        <img
+                            src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1100&q=85"
+                            alt="Fashion designer inspired editorial portrait"
+                            class="w-full h-[520px] object-cover hover:scale-105 transition duration-700">
+                    </div>
+
+                    <div class="absolute -bottom-7 -left-5 bg-[#302820] text-white px-7 py-6 rounded-2xl">
+                        <p class="serif text-3xl">ATELIERÉ®</p>
+                        <p class="text-[10px] tracking-[3px] uppercase text-[#c2a58d] mt-2">Wear your story</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- VALUES -->
+        <section class="px-6 lg:px-16 py-28">
+
+            <div class="max-w-7xl mx-auto">
+
+                <div class="mb-16">
+                    <p class="text-[#a65d3e] text-xs uppercase tracking-[4px] font-bold mb-5">
+                        What We Believe
+                    </p>
+
+                    <h2 class="serif text-6xl sm:text-7xl">
+                        The details <span class="italic">matter.</span>
+                    </h2>
+                </div>
+
+
+                <div class="grid md:grid-cols-3 gap-10">
+
+                    <div class="border-t border-[#cfc5b8] pt-8 editorial-text">
+                        <span class="text-[#a65d3e] text-xs font-bold">01 / DESIGN</span>
+                        <h3 class="serif text-4xl mt-7">Considered Forms</h3>
+                        <p class="text-[#817568] text-sm leading-7 mt-5">
+                            Thoughtful silhouettes and balanced
+                            proportions that bring character to
+                            everyday dressing.
+                        </p>
+                    </div>
+
+                    <div class="border-t border-[#cfc5b8] pt-8 editorial-text">
+                        <span class="text-[#a65d3e] text-xs font-bold">02 / QUALITY</span>
+                        <h3 class="serif text-4xl mt-7">Meaningful Details</h3>
+                        <p class="text-[#817568] text-sm leading-7 mt-5">
+                            An appreciation for material, finish
+                            and the small decisions that make
+                            a piece feel special.
+                        </p>
+                    </div>
+
+                    <div class="border-t border-[#cfc5b8] pt-8 editorial-text">
+                        <span class="text-[#a65d3e] text-xs font-bold">03 / EXPRESSION</span>
+                        <h3 class="serif text-4xl mt-7">Personal Style</h3>
+                        <p class="text-[#817568] text-sm leading-7 mt-5">
+                            Clothing that leaves room for
+                            individuality rather than following
+                            someone else's rules.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NEWSLETTER -->
+        <section class="bg-[#a65d3e] text-white px-6 lg:px-16 py-24">
+
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+
+                <div>
+                    <p class="text-white/70 text-xs uppercase tracking-[4px] font-bold mb-6">
+                        A Note From The Atelier
+                    </p>
+
+                    <h2 class="serif text-6xl sm:text-7xl leading-[.95]">
+                        Good taste.
+                        <span class="italic">Delivered.</span>
+                    </h2>
+                </div>
+
+                <div>
+
+                    <p class="text-white/80 text-sm leading-8">
+                        Discover new collections, editorial stories
+                        and considered style inspiration from
+                        the world of ATELIERÉ.
+                    </p>
+
+                    <a href="mailto:hello@ateliere.example?subject=Atelier%20Updates"
+                        class="shop-button inline-flex bg-[#f5f1e9] text-[#302820] px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest mt-8">
+                        Stay Connected
+                    </a>
+
+                    <p class="text-white/60 text-[10px] mt-5">
+                        Get in touch to learn about upcoming collections.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT -->
+        <section id="contact" class="px-6 lg:px-16 py-28">
+
+            <div class="max-w-7xl mx-auto text-center">
+
+                <p class="text-[#a65d3e] text-xs uppercase tracking-[4px] font-bold mb-7">
+                    Your Next Favourite Piece Awaits
+                </p>
+
+                <h2 class="serif text-6xl sm:text-8xl leading-[.9]">
+                    Find your
+                    <span class="italic text-[#a65d3e]">own style.</span>
+                </h2>
+
+                <p class="text-[#817568] text-sm leading-8 max-w-lg mx-auto mt-8">
+                    Explore the collection and discover pieces
+                    that feel like they were made for your story.
+                </p>
+
+                <div class="flex justify-center flex-wrap gap-4 mt-10">
+
+                    <a href="#new"
+                        class="shop-button bg-[#302820] text-white px-9 py-4 rounded-full text-xs font-bold uppercase tracking-widest">
+                        Shop New Arrivals
+                    </a>
+
+                    <a href="mailto:hello@ateliere.example"
+                        class="shop-button border border-[#c8bfb0] px-9 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[#a65d3e] hover:text-white">
+                        Contact Us
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-[#302820] text-[#f5f1e9] px-6 lg:px-16 pt-16 pb-8">
+
+        <div class="max-w-7xl mx-auto">
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-[1.4fr_.7fr_.7fr_.8fr] gap-12 pb-16 border-b border-white/15">
+
+                <div>
+
+                    <a href="#" class="serif text-4xl font-bold tracking-wide">
+                        ATELIERÉ<span class="text-[#c47c58]">®</span>
+                    </a>
+
+                    <p class="text-[#b8a99a] text-sm leading-7 max-w-sm mt-6">
+                        An independent fashion label exploring
+                        personal style through considered design,
+                        modern forms and timeless details.
+                    </p>
+
+                    <p class="text-[#c2a58d] text-xs uppercase tracking-[3px] mt-8">
+                        Wear your story.
+                    </p>
+
+                </div>
+
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-[2px] mb-6">Discover</h4>
+
+                    <ul class="space-y-4 text-xs text-[#b8a99a]">
+                        <li><a href="#new" class="hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="#collections" class="hover:text-white transition">Collections</a></li>
+                        <li><a href="#story" class="hover:text-white transition">Our Story</a></li>
+                        <li><a href="#journal" class="hover:text-white transition">Journal</a></li>
+                    </ul>
+                </div>
+
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-[2px] mb-6">Information</h4>
+
+                    <ul class="space-y-4 text-xs text-[#b8a99a]">
+                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">Shipping</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">Returns</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">FAQs</a></li>
+                    </ul>
+                </div>
+
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-[2px] mb-6">Follow Along</h4>
+
+                    <ul class="space-y-4 text-xs text-[#b8a99a]">
+                        <li><a href="#" class="hover:text-white transition">Instagram</a></li>
+                        <li><a href="#" class="hover:text-white transition">Pinterest</a></li>
+                        <li><a href="#" class="hover:text-white transition">Facebook</a></li>
+                        <li><a href="#" class="hover:text-white transition">TikTok</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-5 pt-8 text-[10px] text-[#9c8e80] uppercase tracking-wider">
+
+                <p>© 2026 ATELIERÉ®. All rights reserved.</p>
+
+                <p>Designed for individuality.</p>
+
+                <a href="#" class="hover:text-white transition">Back to top ↑</a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
